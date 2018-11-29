@@ -7,7 +7,6 @@ Write a function named sortBackwards that takes in an array of numbers and retur
 
 const sortBackwards = (arr) => {
   arr.sort(sorter);
-  console.log(arr);
   return(arr);
 };
 function sorter (a,b){
@@ -29,6 +28,7 @@ const alphabetize = (arr) => {
     if (a<b)return -1;
     return 0;
   })
+  console.log(arr);
   return (arr);
   // Solution code here...
 };
@@ -40,10 +40,9 @@ Write a function named sortByLength that takes in an array of strings and return
 
 const sortByLength = (arr) => {
   arr.sort((a,b)=>{
-    let as=a.split().length;
-    let bs=b.split().length;
-    if (as>bs)return -1;
-    if (as<bs)return 1;
+    
+    if (a.length>b.length)return 1;
+    if (a.length<b.length)return -1;
     return 0;
   })
   return (arr);
@@ -57,7 +56,12 @@ For example, ['Alphabet', 'alphabet', 'carrot', 'Zebra'] is correctly sorted, an
 ------------------------------------------------------------------------------------------------ */
 
 const alphabetizeBetter = (arr) => {
-  // Solution code here...
+  arr.sort((a,b)=>{
+    if (a.toLowerCase()>b.toLowerCase())return 1;
+    if (a.toLowerCase()<b.toLowerCase())return -1;
+    return 0;
+  })
+  return(arr);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -159,7 +163,7 @@ DO NOT CHANGE any of the below code.
 Run your tests from the console: jest challenges-03.test.js
 ------------------------------------------------------------------------------------------------ */
 
-xdescribe('Testing challenge 1', () => {
+describe('Testing challenge 1', () => {
   test('It should sort high-to-low the numbers in an array', () => {
     const nums = [3,4,5,6,7];
     expect(sortBackwards(nums)).toStrictEqual([7,6,5,4,3]);
@@ -170,7 +174,7 @@ xdescribe('Testing challenge 1', () => {
   });
 });
 
-xdescribe('Testing challenge 2', () => {
+describe('Testing challenge 2', () => {
   test('It should sort strings alphabetically', () => {
     expect(alphabetize(['alphabet', 'Zebra', 'Alphabet', 'carrot'])).toStrictEqual([ 'Alphabet', 'Zebra', 'alphabet', 'carrot']);
     expect(alphabetize(['alphabet','Alphabet', 'carrot'])).toStrictEqual([ 'Alphabet', 'alphabet', 'carrot']);
@@ -189,7 +193,7 @@ describe('Testing challenge 3', () => {
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   test('It should alphabetize without regard to capitalization', () => {
     expect(alphabetizeBetter(['Alice', 'apple', 'alert', 'Average'])).toStrictEqual([ 'alert', 'Alice', 'apple', 'Average' ]);
     const ans = alphabetizeBetter(['alphabet', 'Zebra', 'Alphabet', 'carrot']);
